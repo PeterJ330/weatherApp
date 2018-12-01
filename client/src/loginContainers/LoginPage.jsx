@@ -4,6 +4,7 @@ import Auth from '../modules/Auth';
 import LoginForm from '../loginComponents/LoginForm';
 
 
+
 class LoginPage extends React.Component {
 
   /**
@@ -69,7 +70,7 @@ class LoginPage extends React.Component {
         this.props.toggleAuthenticateStatus()
 
         // redirect signed in user to dashboard
-        this.props.history.push('/dashboard');
+        this.props.history.push('/');
       } else {
         // failure
 

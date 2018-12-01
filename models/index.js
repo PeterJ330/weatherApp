@@ -1,3 +1,5 @@
+  // load models
+  var User = require('../models');
 const mongoose = require('mongoose');
 
 module.exports.connect = (uri) => {
@@ -11,6 +13,5 @@ module.exports.connect = (uri) => {
     process.exit(1);
   });
 
-  // load models
-  require('./user');
+
 };
