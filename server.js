@@ -41,7 +41,7 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/weatherapp"
+  process.env.MONGODB_URI || "mongodb://localhost/User"
 );
 
 app.listen(PORT, function() {

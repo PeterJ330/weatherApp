@@ -215,7 +215,7 @@ class WeatherApp extends Component {
 
                     {/* <WeatherAlert /> */}
 
-                    <WeatherIcons />
+                    {/* <WeatherIcons /> */}
 
                     <CurrentWeather
                         image={this.state.image}
@@ -224,7 +224,9 @@ class WeatherApp extends Component {
                         feelsLike={this.state.feelsLike}
                         dailyLow={this.state.dailyLow}
                         dailyHigh={this.state.dailyHigh}
-                    />
+                    >
+                    <WeatherIcons />
+                    </CurrentWeather>
 
                     <div id="scrollContainer">
                         {(this.state.hourlyWeather.slice(1, 19)).map((hourly, i) => (

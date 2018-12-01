@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -8,8 +7,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     index: { unique: true }
   },
-  password: String,
-  name: String
+  password: {
+    type: String,
+    default: ""
+  },
+
+  name: {
+    type: String,
+    default: ""
+  } 
 });
 
 
@@ -48,5 +54,6 @@ UserSchema.pre('save', function saveHook(next) {
   });
 });
 
-
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+module.exports = User;
+// module.exports = mongoose.model('User', UserSchema);
