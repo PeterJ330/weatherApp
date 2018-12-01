@@ -5,6 +5,7 @@ const passport = require('passport');
 const config = require('./config');
 const PORT = process.env.PORT || 3001;
 const app = express();
+const mongoose = require('mongoose');
 
 // connect to the database and load models
 require('./models').connect(config.dbUri);
@@ -41,7 +42,7 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/weatherapp"
+  process.env.MONGODB_URI || "mongodb://localhost/User"
 );
 
 

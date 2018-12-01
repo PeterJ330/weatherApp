@@ -7,6 +7,7 @@ import WeatherApp from "./pages/WeatherApp"
 import LoginPage from "./pages/LoginPage"
 // import SignUpPage from "./loginContainers/SignUpPage";
 import SignUpPage from "../src/loginContainers/SignUpPage"
+import Dashboard from "../src/loginComponents/Dashboard"
 
 
 // class App extends Component {
@@ -30,6 +31,7 @@ const App = () => (
         <Route exact path="/login" component={LoginPage} />
 
         <Route exact path="/signup" component={SignUpPage} />
+        <Route exat path="/dashboard" component={Dashboard} />
       </Switch>
     </div>
   </Router>
