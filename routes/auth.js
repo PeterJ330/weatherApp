@@ -113,7 +113,7 @@ router.post('/auth/signup', (req, res, next) => {
   })(req, res, next);
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/auth/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
   if (!validationResult.success) {
     return res.status(400).json({
