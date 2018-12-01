@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import GeoCodeAPI from "../../utils/GeoCodeAPI";
 import Navbar from "../../components/Navbar";
+import LocationDisplay from "../../components/LocationDisplay";
 // import WeatherAlert from "../../components/WeatherAlert";
 import WeatherIcons from "../../components/WeatherIcons";
 import CurrentWeather from "../../components/CurrentWeather";
@@ -30,7 +31,9 @@ class WeatherApp extends Component {
         dailyWeather: [],
         hourlyWeather: [],
         backgroundImage: "",
-        currentTime: ""
+        currentTime: "",
+        city: "",
+        state: ""
     };
 
     handleInputChange = event => {
@@ -52,8 +55,12 @@ class WeatherApp extends Component {
                     geoCode: res.data,
                     latitude: res.data.results[0].geometry.location.lat,
                     longitude: res.data.results[0].geometry.location.lng,
+                    city: res.data.results[0].address_components[0].long_name,
+                    state: res.data.results[0].address_components[2].long_name,
                 })
                 console.log(this.state.geoCode);
+                console.log(this.state.city);
+                console.log(this.state.state);
                 API.search(
                     this.state.latitude,
                     this.state.longitude,
@@ -135,9 +142,13 @@ class WeatherApp extends Component {
                     geoCode: res.data,
                     latitude: res.data.results[0].geometry.location.lat,
                     longitude: res.data.results[0].geometry.location.lng,
+                    city: res.data.results[0].address_components[0].long_name,
+                    state: res.data.results[0].address_components[2].long_name,
                 })
                 console.log(`address = ${this.state.address}`);
                 console.log(this.state.geoCode);
+                console.log(this.state.city);
+                console.log(this.state.state);
                 API.search(
                     this.state.latitude,
                     this.state.longitude,
@@ -212,6 +223,10 @@ class WeatherApp extends Component {
                         handleInputChange={this.handleInputChange}
                         handleFormSubmit={this.handleFormSubmit}
                     />
+                    <LocationDisplay
+                    city={this.state.city}
+                    state={this.state.state}
+                     />
 
                     {/* <WeatherAlert /> */}
 
