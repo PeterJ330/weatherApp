@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 
-// This file empties the Books collection and inserts the books below
+// This file empties the Users collection and inserts the books below
 
+// mongoose.connect(
+//   process.env.MONGODB_URI ||
+//   "mongodb://localhost/users"
+// );
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/users"
+  "mongodb://localhost/weatherwatch"
 );
 
 const userSeed = [

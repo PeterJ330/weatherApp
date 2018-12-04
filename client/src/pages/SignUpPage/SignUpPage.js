@@ -12,6 +12,23 @@ class SignUpPage extends Component {
         confirmPassword: ""
     };
 
+    componentDidMount() {
+        this.loadUsers();
+    }
+
+    loadUsers = () => {
+        API.getUsers()
+            .then(res =>
+                this.setState({ users: res.data, username: "", password: "" })
+            )
+            .catch(err => console.log(err));
+    };
+
+    deleteUser = id => {
+        API.deleteUser(id)
+            .then(res => this.loadUsers())
+            .catch(err => console.log(err));
+    };
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -25,11 +42,12 @@ class SignUpPage extends Component {
         event.preventDefault();
         if (this.state.username && this.state.password && this.state.confirmPassword) {
             if (this.state.password === this.state.confirmPassword) {
+                console.log("Should be running API.saveUser()");
                 API.saveUser({
                     username: this.state.username,
                     password: this.state.password,
                 })
-                    // .then(res => this.loadUsers())
+                    .then(res => this.loadUsers())
                     .catch(err => console.log(err));
             } else {
                 alert("Passwords do not match")
