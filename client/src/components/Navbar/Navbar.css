@@ -1,13 +1,20 @@
-.input-field {
-    width: 50%
-
-}
-
-/* #search {
-    padding-left: -25px;
-} */
-
 .nav-wrapper {
     background-color: steelblue;
 
 }
+
+#title {
+    text-align: center;
+    /* clear: both; */
+}
+
+button {
+    background-color: steelblue;
+    border-color: steelblue;
+    color: white;
+}
+
+#searchForm {
+    width: 30%;
+}
+

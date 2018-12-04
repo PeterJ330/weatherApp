@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {DARK_SKY} from "../../utils/config" ;
+import { DARK_SKY } from "../../utils/config";
 
 class Map extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.availableFields = {
@@ -25,11 +25,11 @@ class Map extends Component {
         this.uom = this.uom.bind(this);
     }
 
-    shouldComponentUpdate () {
+    shouldComponentUpdate() {
         return true;
     }
 
-    url () {
+    url() {
         let {
             lat, lng, zoom, units, fieldControl, timeControl, mapField,
         } = this.props;
@@ -53,27 +53,27 @@ class Map extends Component {
         return url.replace(/\s/g, '');
     }
 
-    uom (units) {
+    uom(units) {
         switch (this.props.mapField) {
-        case 'temp':
-        case 'feelsLike':
-        case 'dewPoint':
-            return units === 'metric' ? '_c' : '_f';
-        case 'precip':
-            return units === 'metric' ? '_mmph' : '_inph';
-        case 'wind':
-        case 'gust':
-            return units === 'metric' ? '_kmph' : '_mph';
-        case 'pressure':
-            return units === 'metric' ? '_hpa' : '_inhg';
-        case 'ozone':
-            return '_du';
-        default:
-            return '';
+            case 'temp':
+            case 'feelsLike':
+            case 'dewPoint':
+                return units === 'metric' ? '_c' : '_f';
+            case 'precip':
+                return units === 'metric' ? '_mmph' : '_inph';
+            case 'wind':
+            case 'gust':
+                return units === 'metric' ? '_kmph' : '_mph';
+            case 'pressure':
+                return units === 'metric' ? '_hpa' : '_inhg';
+            case 'ozone':
+                return '_du';
+            default:
+                return '';
         }
     }
 
-    render () {
+    render() {
         let {
             lat, lng, zoom, units, fieldControl, timeControl, mapField, onLoad, ...others
         } = this.props;

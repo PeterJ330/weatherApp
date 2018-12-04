@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
+import API from "../../utils/DarkSkyAPI";
 import GeoCodeAPI from "../../utils/GeoCodeAPI";
 import Navbar from "../../components/Navbar";
-import LocationDisplay from "../../components/LocationDisplay";
 // import WeatherAlert from "../../components/WeatherAlert";
+// import Time from "../../components/Time";
 import WeatherIcons from "../../components/WeatherIcons";
 import CurrentWeather from "../../components/CurrentWeather";
 import HourlyForecast from "../../components/HourlyForecast";
 import Map from "../../components/Map";
 import FiveDayForecast from "../../components/FiveDayForecast";
 import Footer from "../../components/Footer";
+
 
 class WeatherApp extends Component {
     state = {
@@ -18,8 +19,10 @@ class WeatherApp extends Component {
         latitude: 32.7767,
         longitude: -96.7970,
         image: "",
+        backgroundImage: "",
         alert: "",
-        timeZone: "",
+        time: "",
+        timeZone: "America/Chicago",
         currently: "",
         currentTemp: "",
         feelsLike: "",
@@ -30,10 +33,9 @@ class WeatherApp extends Component {
         currentWeather: [],
         dailyWeather: [],
         hourlyWeather: [],
-        backgroundImage: "",
         currentTime: "",
         city: "",
-        state: ""
+        // state: ""
     };
 
     handleInputChange = event => {
@@ -56,7 +58,7 @@ class WeatherApp extends Component {
                     latitude: res.data.results[0].geometry.location.lat,
                     longitude: res.data.results[0].geometry.location.lng,
                     city: res.data.results[0].address_components[0].long_name,
-                    state: res.data.results[0].address_components[2].long_name,
+                    // state: res.data.results[0].address_components[2].long_name,
                 })
                 console.log(this.state.geoCode);
                 console.log(this.state.city);
@@ -75,6 +77,7 @@ class WeatherApp extends Component {
                             // alert: res.data.alerts[0],
                             timeZone: res.data.timezone,
                             image: res.data.currently.icon,
+                            backgroundImage: res.data.currently.icon,
                             currentSummary: res.data.currently.summary,
                             currentTemp: res.data.currently.temperature,
                             feelsLike: res.data.currently.apparentTemperature,
@@ -86,31 +89,11 @@ class WeatherApp extends Component {
                             precipChance: res.data.currently.precipProbability,
                             currentTime: res.data.currently.time
                         })
-                        if (this.state.image === "clear-day") {
-                            this.setState({ backgroundImage: "clear-day" });
-                        } else if (this.state.image === "clear-night") {
-                            this.setState({ backgroundImage: "clear-night" });
-                        } else if (this.state.image === "rain") {
-                            this.setState({ backgroundImage: "rain" });
-                        } else if (this.state.image === "snow") {
-                            this.setState({ backgroundImage: "snow" });
-                        } else if (this.state.image === "sleet") {
-                            this.setState({ backgroundImage: "snow" });
-                        } else if (this.state.image === "wind") {
-                            this.setState({ backgroundImage: "wind" });
-                        } else if (this.state.image === "fog") {
-                            this.setState({ backgroundImage: "fog" });
-                        } else if (this.state.image === "cloudy") {
-                            this.setState({ backgroundImage: "cloudy-day" });
-                        } else if (this.state.image === "partly-cloudy-day") {
-                            this.setState({ backgroundImage: "cloudy-day" });
-                        } else if (this.state.image === "partly-cloudy-night") {
-                            this.setState({ backgroundImage: "cloudy-night" });
-                        }
                         console.log(this.state.currentWeather);
                         // console.log(this.state.hourlyWeather);
                         console.log(`
                         Time Zone: ${this.state.timeZone}
+                        Current Time: ${this.state.currentTime}
                         Alert: ${this.state.alert}
                         Current Temp: ${this.state.currentTemp} 
                         Feels Like: ${this.state.feelsLike}
@@ -122,15 +105,17 @@ class WeatherApp extends Component {
                         Precip Chance: ${this.state.precipChance}
                         Image: ${this.state.image}
                         background-image: ${this.state.backgroundImage}
-                        Current Time: ${this.state.currentTime}
                         `)
                     })
-                // .value().trim();
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .then(res => {
+                // this.value();
+                document.getElementById('search').value = ''
+            })
     };  //closes handleFormSubmit
 
-    componentDidMount() {
+    componentWillMount() {
         GeoCodeAPI.search(
             this.state.address,
             console.log(`
@@ -143,7 +128,7 @@ class WeatherApp extends Component {
                     latitude: res.data.results[0].geometry.location.lat,
                     longitude: res.data.results[0].geometry.location.lng,
                     city: res.data.results[0].address_components[0].long_name,
-                    state: res.data.results[0].address_components[2].long_name,
+                    // state: res.data.results[0].address_components[2].long_name,
                 })
                 console.log(`address = ${this.state.address}`);
                 console.log(this.state.geoCode);
@@ -162,7 +147,9 @@ class WeatherApp extends Component {
                             currentWeather: res.data,
                             // alert: res.data.alerts[0],
                             timeZone: res.data.timezone,
+                            currentTime: res.data.currently.time,
                             image: res.data.currently.icon,
+                            backgroundImage: res.data.currently.icon,
                             currentSummary: res.data.currently.summary,
                             currentTemp: res.data.currently.temperature,
                             feelsLike: res.data.currently.apparentTemperature,
@@ -173,30 +160,10 @@ class WeatherApp extends Component {
                             dewPoint: res.data.currently.dewPoint,
                             precipChance: res.data.currently.precipProbability,
                         })
-                        if (this.state.image === "clear-day") {
-                            this.setState({ backgroundImage: "clear-day" });
-                        } else if (this.state.image === "clear-night") {
-                            this.setState({ backgroundImage: "clear-night" });
-                        } else if (this.state.image === "rain") {
-                            this.setState({ backgroundImage: "rain" });
-                        } else if (this.state.image === "snow") {
-                            this.setState({ backgroundImage: "snow" });
-                        } else if (this.state.image === "sleet") {
-                            this.setState({ backgroundImage: "snow" });
-                        } else if (this.state.image === "wind") {
-                            this.setState({ backgroundImage: "wind" });
-                        } else if (this.state.image === "fog") {
-                            this.setState({ backgroundImage: "fog" });
-                        } else if (this.state.image === "cloudy") {
-                            this.setState({ backgroundImage: "cloudy-day" });
-                        } else if (this.state.image === "partly-cloudy-day") {
-                            this.setState({ backgroundImage: "cloudy-day" });
-                        } else if (this.state.image === "partly-cloudy-night") {
-                            this.setState({ backgroundImage: "cloudy-night" });
-                        }
                         console.log(this.state.currentWeather);
                         console.log(`
                         Time Zone: ${this.state.timeZone}
+                        Current Time: ${this.state.currentTime}
                         Alert: ${this.state.alert}
                         Current Temp: ${this.state.currentTemp} 
                         Feels Like: ${this.state.feelsLike}
@@ -223,16 +190,13 @@ class WeatherApp extends Component {
                         handleInputChange={this.handleInputChange}
                         handleFormSubmit={this.handleFormSubmit}
                     />
-                    <LocationDisplay
-                    city={this.state.city}
-                    state={this.state.state}
-                     />
 
                     {/* <WeatherAlert /> */}
 
-                    {/* <WeatherIcons /> */}
-
                     <CurrentWeather
+                        currentTime={this.state.currentTime}
+                        timeZone={this.state.timeZone}
+                        city={this.state.city}
                         image={this.state.image}
                         currentSummary={this.state.currentSummary}
                         currentTemp={this.state.currentTemp}
@@ -240,7 +204,7 @@ class WeatherApp extends Component {
                         dailyLow={this.state.dailyLow}
                         dailyHigh={this.state.dailyHigh}
                     >
-                    <WeatherIcons />
+                        <WeatherIcons />
                     </CurrentWeather>
 
                     <div id="scrollContainer">

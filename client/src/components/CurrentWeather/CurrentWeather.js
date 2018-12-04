@@ -1,14 +1,20 @@
 import React from "react";
 import "./CurrentWeather.css";
+import moment from "moment";
+import momentTimeZone from "moment-timezone";
 
-const CurrentWeather = props => (  
+const CurrentWeather = props => (
   <div
     style={{ height: 300, clear: "both", paddingTop: 5, textAlign: "center" }}
     className="CurrentWeather"
   >
-    {/*          {moment(props.hourlyTime * 1000).tz(props.timeZone).format("h:mm A")}
- /> */}
-    <div> 
+    <div id="currentTime">
+      {moment(props.currentTime * 1000).tz(props.timeZone).format("h:mm A")}
+    </div>
+    <div>
+      <h3 className="location">{props.city}</h3>
+    </div>
+    <div>
       <h1 className="currentTemp">{Math.round(props.currentTemp)}°</h1>
     </div>
     <div>
@@ -22,7 +28,7 @@ const CurrentWeather = props => (
     </div>
 
   </div>
-  
+
 );
 
 export default CurrentWeather;

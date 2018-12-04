@@ -1,0 +1,9 @@
+.input {
+    max-width: 50%;
+}
+
+#password {
+    -webkit-text-security: disc;
+    /* -moz-text-security: disc; */
+
+}

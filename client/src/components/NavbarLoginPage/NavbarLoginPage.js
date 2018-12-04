@@ -6,7 +6,7 @@ const NavbarLoginPage = props => {
     return (
         <nav>
             <div className="nav-wrapper">
-                <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <ul id="nav-mobile" className="right">
                     <li>
                         <a href="/"> <i className="material-icons">home</i>
                         </a>
