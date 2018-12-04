@@ -18,23 +18,15 @@ const UserSchema = new Schema({
       "Password should be longer."
     ]
   },
-  // email: {
-  //   type: String,
-  //   unique: true,
-  //   match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
-  // },
   savedLocations: {
     type: Array,
   },
-  // `date` must be of type Date. The default value is the current date
   userCreated: {
     type: Date,
     default: Date.now
   }
 });
 
-// This creates our model from the above schema, using mongoose's model method
 const User = mongoose.model("User", UserSchema);
 
-// Export the User model
 module.exports = User;

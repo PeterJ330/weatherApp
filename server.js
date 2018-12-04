@@ -17,7 +17,8 @@ app.use(routes);
 
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/users",  { useNewUrlParser: true });
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/weatherwatch",  { useNewUrlParser: true });
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/weatherwatch",  { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/weatherwatch");
 
 // Start the API server
 app.listen(PORT, function() {
