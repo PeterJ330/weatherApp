@@ -92,6 +92,15 @@
     background-repeat: no-repeat;
     height: 100%;
  }
+ #cloudy {
+   background-image: url('../../img/cloudy-day.jpg');
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   background-repeat: no-repeat;
+   height: 100%;
+}
 
  #partly-cloudy-day {
     background-image: url('../../img/cloudy-day.jpg');

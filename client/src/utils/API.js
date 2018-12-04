@@ -6,11 +6,15 @@ export default {
     return axios.get("/api/users");
   },
   // Gets the user with the given id
-  getUser: function(id) {
+  getUserId: function(id) {
     return axios.get("/api/users/" + id);
   },
+  // Gets the user with the given username
+  getUserUsername: function(username) {
+    return axios.get("/api/users/" + username);
+  },
   // Deletes the user with the given id
-  deleteBook: function(id) {
+  deleteUser: function(id) {
     return axios.delete("/api/users/" + id);
   },
   // Saves a user to the database

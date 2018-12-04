@@ -7,28 +7,41 @@ import Footer from "../../components/Footer";
 
 class SignUpPage extends Component {
     state = {
+        users: [],
         username: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        duplicateUsername: ""
     };
 
     componentDidMount() {
         this.loadUsers();
+
     }
 
     loadUsers = () => {
         API.getUsers()
             .then(res =>
-                this.setState({ users: res.data, username: "", password: "" })
+                this.setState({
+                    users: res.data,
+                    username: "",
+                    password: ""
+                })
             )
+            .then(res => {
+                console.log(this.state.users);
+                console.log(this.state.users[0]);
+                console.log(this.state.users[0].username);
+                console.log(this.state.users.length);
+            })
             .catch(err => console.log(err));
     };
 
-    deleteUser = id => {
-        API.deleteUser(id)
-            .then(res => this.loadUsers())
-            .catch(err => console.log(err));
-    };
+    // deleteUser = id => {
+    //     API.deleteUser(id)
+    //         .then(res => this.loadUsers())
+    //         .catch(err => console.log(err));
+    // };
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -42,12 +55,15 @@ class SignUpPage extends Component {
         event.preventDefault();
         if (this.state.username && this.state.password && this.state.confirmPassword) {
             if (this.state.password === this.state.confirmPassword) {
-                console.log("Should be running API.saveUser()");
+                // for (var i = 0; i < this.state.users.length; i++) {
+                //     if (this.state.username === this.state.users[i].username) {
+                //         alert("Username already exists")
+                //     }
+                // };
                 API.saveUser({
                     username: this.state.username,
                     password: this.state.password,
                 })
-                    .then(res => this.loadUsers())
                     .catch(err => console.log(err));
             } else {
                 alert("Passwords do not match")
